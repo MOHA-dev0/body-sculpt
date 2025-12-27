@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 156 100% 50%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 20% 14%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 156 100% 50%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 16%;
+    --ring: 156 100% 50%;
+
+    --radius: 1rem;
+
+    /* Custom tokens */
+    --glow-primary: 0 0 30px hsl(156 100% 50% / 0.4);
+    --glow-primary-strong: 0 0 60px hsl(156 100% 50% / 0.6);
+    --glass-bg: hsl(220 20% 10% / 0.6);
+    --glass-border: hsl(220 15% 25% / 0.3);
+    
+    /* BMI Category Colors */
+    --bmi-underweight: 200 100% 60%;
+    --bmi-normal: 156 100% 50%;
+    --bmi-overweight: 45 100% 55%;
+    --bmi-obese: 0 80% 55%;
+
+    --sidebar-background: 220 20% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 156 100% 50%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 220 20% 14%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 156 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-border/30 rounded-2xl;
+  }
+
+  .glow-effect {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-effect-strong {
+    box-shadow: var(--glow-primary-strong);
+  }
+
+  .input-glow:focus {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-emerald-400 to-primary bg-clip-text text-transparent;
+  }
+
+  .gauge-underweight {
+    stroke: hsl(var(--bmi-underweight));
+    filter: drop-shadow(0 0 8px hsl(var(--bmi-underweight) / 0.6));
+  }
+
+  .gauge-normal {
+    stroke: hsl(var(--bmi-normal));
+    filter: drop-shadow(0 0 8px hsl(var(--bmi-normal) / 0.6));
+  }
+
+  .gauge-overweight {
+    stroke: hsl(var(--bmi-overweight));
+    filter: drop-shadow(0 0 8px hsl(var(--bmi-overweight) / 0.6));
+  }
+
+  .gauge-obese {
+    stroke: hsl(var(--bmi-obese));
+    filter: drop-shadow(0 0 8px hsl(var(--bmi-obese) / 0.6));
+  }
+}
+
+@layer utilities {
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  .animate-gauge {
+    animation: gauge-fill 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(156 100% 50% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(156 100% 50% / 0.5);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gauge-fill {
+  from {
+    stroke-dashoffset: 283;
+  }
+}
